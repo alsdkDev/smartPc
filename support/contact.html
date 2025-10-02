@@ -26,42 +26,50 @@
 
             <nav aria-label="주요 메뉴">
                 <ul class="nav">
-                    <li><a href="../about/about.html">회사소개</a></li>
-                    <li><a href="../works/works.html">시공사례</a></li>
-                    <li><a href="../support/contact.html">고객지원</a></li>
+                    <li class="nav__item" data-panel="about">
+                        <a href="../about/about.html" class="nav__link">회사소개</a>
+                    </li>
+                    <li class="nav__item" data-panel="works">
+                        <a href="../works/works.html" class="nav__link">시공사례</a>
+                    </li>
+                    <li class="nav__item" data-panel="support">
+                        <a href="../support/contact.html" class="nav__link">고객지원</a>
+                    </li>
                 </ul>
             </nav>
         </div>
 
         <!-- 전체 서브메뉴 패널 -->
         <div class="global-panel">
-            <div class="container panel__inner">
+            <div class="container">
 
-                <div class="panel__col">
-                    <h3>회사소개</h3>
-                    <ul>
-                        <li><a href="../about/about.html">인사말</a></li>
-                        <li><a href="../about/licenses.html">면허·인증</a></li>
-                        <li><a href="../about/team.html">조직도/임원소개</a></li>
-                        <li><a href="../about/overview.html">회사현황</a></li>
-                    </ul>
-                </div>
+                <!-- 기존 3열 콘텐츠 -->
+                <div class="panel__inner">
+                    <div class="panel__col panel-about">
+                        <h3>회사소개</h3>
+                        <ul>
+                            <li><a href="../about/greeting.html">인사말</a></li>
+                            <li><a href="../about/licenses.html">면허·인증</a></li>
+                            <li><a href="../about/team.html">조직도/임원소개</a></li>
+                            <li><a href="../about/overview.html">회사현황</a></li>
+                        </ul>
+                    </div>
 
-                <div class="panel__col">
-                    <h3>시공사례</h3>
-                    <ul>
-                        <li><a href="../works/works.html">전체 보기</a></li>
-                        <!-- 카테고리 생기면 추가 -->
-                    </ul>
-                </div>
+                    <div class="panel__col panel-works">
+                        <h3>시공사례</h3>
+                        <ul>
+                            <li><a href="../works/works.html">전체 보기</a></li>
+                        </ul>
+                    </div>
 
-                <div class="panel__col">
-                    <h3>고객지원</h3>
-                    <ul>
-                        <li><a href="../support/contact.html">문의하기</a></li>
-                        <li><a href="../support/location.html">오시는 길</a></li>
-                        <li><a href="../support/faq.html">Q&A</a></li>
-                    </ul>
+                    <div class="panel__col panel-support">
+                        <h3>고객지원</h3>
+                        <ul>
+                            <li><a href="../support/contact.html">문의하기</a></li>
+                            <li><a href="../support/location.html">오시는 길</a></li>
+                            <li><a href="../support/faq.html">Q&A</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -96,13 +104,16 @@
             </div>
         </section>
     </main>
-    
+
     <p class="mt-2" style="font-size:14px; color:#666; margin-top:16px;"></p>
     <footer class="footer">
         <div class="container footer__inner" style="padding:16px 0;">
             <small>© 2025 회사명 | 주소 | 사업자등록번호 | 010-0000-0000</small>
         </div>
     </footer>
+
+    <script src="../assets/js/nav.js" defer></script>
+
 </body>
 
 </html>
