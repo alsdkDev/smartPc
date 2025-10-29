@@ -96,9 +96,12 @@ video {
     height: 64px;
 }
 
-.brand {
-    font-weight: 700;
-    letter-spacing: -0.2px;
+.brand-logo {
+    height: 65px;
+    /* 기존보다 조금 커서 시인성 향상 */
+    width: auto;
+    display: block;
+    object-fit: contain;
 }
 
 /* === 상위 네비게이션 === */
@@ -225,17 +228,14 @@ video {
 /* === 건물 배경 이미지 및 중앙 배치 === */
 .hero--main {
     position: relative;
-    background: url("../img/building.jpg") center/cover no-repeat;
+    background: url("../img/building1.jpg") center/cover no-repeat;
     min-height: 60vh;
-    /* 높이 줄이기 */
+    /* 헤더 밑 공간 확보 */
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-    text-align: center;
-    overflow: hidden;
-    /* 혹시 모를 overflow 방지 */
 }
+
 
 /* 어두운 반투명 오버레이 */
 .hero--main::before {
@@ -438,158 +438,6 @@ video {
 .footer__inner {
     padding: 16px 0;
     font-size: 14px;
-}
-
-/* 시공사례 카드 레이아웃 */
-.works {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    /* 카드 간 간격 */
-}
-
-.work-card {
-    position: relative;
-    border: 1px solid #eee;
-    border-radius: 12px;
-    overflow: hidden;
-    /* 테두리 라운드 유지 */
-    display: flex;
-    align-items: flex-start;
-    transition: box-shadow .2s ease, transform .2s ease;
-    background: #fff;
-}
-
-.work-card:hover {
-    box-shadow: 0 6px 24px rgba(0, 0, 0, .06);
-}
-
-.work-card img.thumb {
-    width: 200px;
-    height: 150px;
-    object-fit: cover;
-    flex-shrink: 0;
-}
-
-.work-card .content {
-    flex: 1;
-    padding: 16px;
-    position: relative;
-}
-
-/* + 버튼 */
-.expand-btn {
-    position: absolute;
-    right: 12px;
-    bottom: 12px;
-    font-size: 20px;
-    width: 34px;
-    height: 34px;
-    border: none;
-    border-radius: 50%;
-    background: #000;
-    color: #fff;
-    cursor: pointer;
-}
-
-/* 상세 영역: 기본은 감춤 */
-.details {
-    display: none;
-    padding: 16px;
-    background: #fafafa;
-    width: 100%;
-    position: relative;
-    /* 닫기 버튼 배치 기준 */
-    border-top: 1px solid #f0f0f0;
-}
-
-
-/* 확장 상태 */
-.work-card.expanded {
-    flex-direction: column;
-    /* 세로로 확장 */
-}
-
-.work-card.expanded .details {
-    display: block;
-    /* 상세 보이기 */
-}
-
-/* 반응형 */
-@media (max-width: 640px) {
-    .work-card {
-        flex-direction: column;
-    }
-
-    .work-card img.thumb {
-        width: 100%;
-        height: auto;
-    }
-}
-
-/* 펼친 상태: + 버튼 숨기기 */
-.work-card.expanded .expand-btn {
-    display: none;
-}
-
-/* 공통 버튼 */
-.expand-btn,
-.close-btn {
-    position: absolute;
-    right: 12px;
-    bottom: 12px;
-    /* + 버튼과 같은 좌표 */
-    width: 34px;
-    height: 34px;
-    border: none;
-    border-radius: 50%;
-    background: #000;
-    color: #fff;
-    font-size: 18px;
-    line-height: 1;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 20;
-}
-
-/* 기본 상태에서는 X 숨기기 */
-.close-btn {
-    display: none;
-}
-
-/* 펼쳤을 때: + 숨기고 X 보이기 */
-.work-card.expanded .expand-btn {
-    display: none;
-}
-
-.work-card.expanded .close-btn {
-    display: flex;
-}
-
-/* 여러 칸 카드 그리드 */
-.works-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: clamp(16px, 2vw, 28px);
-    align-items: start;
-    /* 같은 줄이라도 높이를 개별로 */
-}
-
-/* 카드 설명 p: 기본 상태 높이 고정(2줄 높이 정도), 넘치면 숨김 */
-.work-card .content p {
-    line-height: 1.5;
-    height: calc(1.5em * 2);
-    /* 2줄 높이 기준 */
-    overflow: hidden;
-    color: #666;
-    margin: 0;
-}
-
-/* 펼친 상태(+ 후): 전체 보이게 자동 높이 */
-.work-card.expanded .content p {
-    height: auto;
 }
 
 /* 스크롤바 폭 변화 방지 */

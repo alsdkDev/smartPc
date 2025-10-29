@@ -1,0 +1,54 @@
+/* 문의하기 페이지 전용 hero */
+.hero-contact__inner {
+    max-width: 960px;
+    /* 기존 container 너비와 동일 */
+    margin: 0 auto;
+    /* 가운데 정렬 */
+    padding-left: 0;
+    /* 좌측 여백 없애기 */
+    padding-right: 0;
+}
+
+/* 문의하기 페이지 제목 강조 */
+.hero-contact__inner h1 {
+    font-size: 32px;
+    /* 글자 키우기 */
+    font-weight: 700;
+    /* 진하게 */
+    color: #333;
+    /* 조금 더 진한 색 */
+    margin-bottom: 8px;
+    /* 아래 여백 */
+}
+
+.hero-contact p {
+    color: #666;
+    margin-top: 8px;
+}
+
+/* 문의하기 페이지 섹션: 연락처/지도 container */
+.contact-container {
+    max-width: 960px;
+    /* hero와 동일 */
+    margin: 0 auto;
+    /* 가운데 정렬 대신 동일 좌측 기준 */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+.contact-container>div {
+    /* flex 비율, 최소 너비는 그대로 유지 */
+    flex: 1 1 40%;
+    min-width: 280px;
+}
+
+.contact-container>div:nth-child(2) {
+    flex: 1 1 50%;
+    min-width: 320px;
+}
+
+body.home main>section:first-child {
+    margin-top: 64px;
+}
