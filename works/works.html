@@ -17,16 +17,15 @@
     <!-- <meta property="og:url" content="https://www.yoursite.com" /> 도메인 -->
     <meta property="og:site_name" content="스마트피씨" />
     <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="../assets/css/works.css" />
 </head>
 
 <body>
     <header class="header">
         <div class="container header__inner"
             style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;">
-            <a href="../index.html" class="brand" aria-current="page"
-                style="display:flex; align-items:center; font-weight:600; gap:8px;">
-                <img src="../assets/img/smartpc.png" alt="스마트피씨 로고" style="height:24px; width:auto; display:block;">
-                스마트피씨
+            <a href="../index.html" class="brand" aria-current="page" style="display:flex; align-items:center;">
+                <img src="../assets/img/smartpc_logo.png" alt="스마트피씨 로고" class="brand-logo">
             </a>
 
             <nav aria-label="주요 메뉴">
@@ -77,65 +76,16 @@
     </header>
 
     <main id="main-content">
-        <section class="hero">
+        <section class="hero hero-works">
             <div class="container">
-                <h1 style="font-size:28px;font-weight:700;">시공사례</h1>
-                <p class="mt-2" style="color:#666;">대표 프로젝트를 선별해 보여드립니다.</p>
+                <h1>시공사례</h1>
+                <p>대표 프로젝트를 선별해 보여드립니다.</p>
             </div>
         </section>
 
-        <section class="container mt-8 works-grid">
-            <!-- 카드 1 -->
-            <article class="work-card">
-                <img src="../assets/img/work1.webp" alt="OO아파트 리모델링" class="thumb">
-                <div class="content">
-                    <h3>OO아파트 리모델링</h3>
-                    <p>주거 공간 기능 개선 및 마감 고도화</p>
-                </div>
-                <div class="details" aria-hidden="true">
-                    <h4>상세 설명</h4>
-                    <p>이곳에 자세한 내용을 작성합니다…</p>
-                </div>
-                <button class="expand-btn" aria-label="자세히 보기">+</button>
-                <button class="close-btn" aria-label="닫기">x</button>
-            </article>
-
-            <!-- 카드 2 -->
-            <article class="work-card">
-                <img src="../assets/img/work2.webp" alt="OO주택 리모델링" class="thumb">
-                <div class="content">
-                    <h3>OO주택 리모델링</h3>
-                    <p>긴글의 제목일 시 일부는 ... 처리되어 보입니다.
-                        +버튼을 누를 시에는 내용이 다 보입니다.
-                </div>
-                </p>
-                </div>
-                <div class="details" aria-hidden="true">
-                    <h4>상세 설명</h4>
-                    <p>이곳에 자세한 내용을 작성합니다…</p>
-                </div>
-                <button class="expand-btn" aria-label="자세히 보기">+</button>
-                <button class="close-btn" aria-label="닫기">x</button>
-            </article>
-
-            <!-- 카드 3 -->
-            <article class="work-card">
-                <img src="../assets/img/work3.webp" alt="OO빌라 리모델링" class="thumb">
-                <div class="content">
-                    <h3>OO빌라 리모델링</h3>
-                    <p>내용2</p>
-                </div>
-                <div class="details" aria-hidden="true">
-                    <h4>상세 설명</h4>
-                    <p>이곳에 OO빌라 리모델링의 자세한 내용을 작성합니다.</p>
-                </div>
-                <button class="expand-btn" aria-label="자세히 보기">+</button>
-                <button class="close-btn" aria-label="닫기">x</button>
-            </article>
-
-        </section>
+        <section class="container mt-8 works-grid" id="works-list"></section>
     </main>
-
+    <!-- 시공사례 카드 -->
     <p class="mt-2" style="font-size:14px; color:#666; margin-top:16px;"></p>
     <footer class="footer">
         <div class="container footer__inner" style="padding:16px 0;">
@@ -146,54 +96,39 @@
     <!-- JS -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const MAX_CHARS = 15; // 👉 원하는 글자 수로 조절
+            fetch("cards.html")
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById("works-list").innerHTML = html;
+                })
+                .then(() => {
+                    // ✅ 카드의 +, x 버튼 로직
+                    const MAX_CHARS = 15;
+                    document.querySelectorAll(".work-card .content p").forEach(p => {
+                        const full = (p.textContent || "").trim();
+                        p.dataset.full = full;
+                        p.dataset.short = full.length > MAX_CHARS ? full.slice(0, MAX_CHARS) + "…" : full;
+                        p.textContent = p.dataset.short;
+                    });
 
-            // 1) 초기 상태: 각 카드의 <p> 텍스트를 글자 수 제한
-            document.querySelectorAll(".work-card .content p").forEach(p => {
-                const full = (p.textContent || "").trim();
-                p.dataset.full = full; // 원본 저장
+                    document.querySelector(".works-grid").addEventListener("click", (e) => {
+                        const card = e.target.closest(".work-card");
+                        if (!card) return;
+                        const p = card.querySelector(".content p");
 
-                if (full.length > MAX_CHARS) {
-                    const short = full.slice(0, MAX_CHARS) + "…";
-                    p.dataset.short = short;
-                    p.textContent = short;
-                } else {
-                    p.dataset.short = full;
-                }
-            });
+                        if (e.target.closest(".expand-btn")) {
+                            card.classList.add("expanded");
+                            card.querySelector(".details")?.setAttribute("aria-hidden", "false");
+                            if (p && p.dataset.full) p.textContent = p.dataset.full;
+                        }
 
-            // 2) 이벤트 위임: + / 닫기(X) 버튼
-            const wrap =
-                document.querySelector(".works-grid") ||
-                document.querySelector(".works") ||
-                document;
-
-            wrap.addEventListener("click", (e) => {
-                const card = e.target.closest(".work-card");
-                if (!card) return;
-
-                const p = card.querySelector(".content p");
-
-                // + 버튼 눌렀을 때
-                if (e.target.closest(".expand-btn")) {
-                    card.classList.add("expanded");
-                    card.querySelector(".details")?.setAttribute("aria-hidden", "false");
-
-                    if (p && p.dataset.full) {
-                        p.textContent = p.dataset.full; // 전체 텍스트 복원
-                    }
-                }
-
-                // 닫기(X) 버튼 눌렀을 때
-                if (e.target.closest(".close-btn")) {
-                    card.classList.remove("expanded");
-                    card.querySelector(".details")?.setAttribute("aria-hidden", "true");
-
-                    if (p) {
-                        p.textContent = p.dataset.short || p.dataset.full; // 축약된 버전으로 복귀
-                    }
-                }
-            });
+                        if (e.target.closest(".close-btn")) {
+                            card.classList.remove("expanded");
+                            card.querySelector(".details")?.setAttribute("aria-hidden", "true");
+                            if (p) p.textContent = p.dataset.short || p.dataset.full;
+                        }
+                    });
+                });
         });
     </script>
 
