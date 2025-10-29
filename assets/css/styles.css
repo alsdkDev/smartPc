@@ -18,8 +18,10 @@ body {
 .container {
     max-width: min(var(--max-w), 100%);
     margin: 0 auto;
-    padding: 0 clamp(12px, 2vw, 32px);
+    padding: 0 16px;
+    /* 좌우 균등한 여백 고정 */
 }
+
 
 /* 가변 폰트 크기 (작은 화면에서 과대/과소 방지) */
 html {
@@ -387,20 +389,20 @@ video {
 }
 
 .ceo-signature {
-  text-align: right !important;
-  font-size: 16px;
-  font-weight: 400;
-  margin-top: 40px;
-  font-family: 'Noto Sans KR', sans-serif;
-  color: #111;
+    text-align: right !important;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 40px;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #111;
 }
 
 .ceo-signature span {
-  font-family: 'Nanum Brush Script', cursive;
-  font-size: 28px;
-  font-weight: 700;
-  margin-left: 10px;
-  vertical-align: middle;
+    font-family: 'Nanum Brush Script', cursive;
+    font-size: 28px;
+    font-weight: 700;
+    margin-left: 10px;
+    vertical-align: middle;
 }
 
 /* --- 회사연혁 --- */
@@ -588,4 +590,18 @@ video {
 /* 펼친 상태(+ 후): 전체 보이게 자동 높이 */
 .work-card.expanded .content p {
     height: auto;
+}
+
+/* 스크롤바 폭 변화 방지 */
+:root {
+    --max-w: 1440px;
+    --gap: 16px;
+    --text: #111;
+    --muted: #666;
+    --border: #eee;
+}
+
+/* ✅ 추가: 항상 스크롤바 공간 확보 */
+html {
+    overflow-y: scroll;
 }

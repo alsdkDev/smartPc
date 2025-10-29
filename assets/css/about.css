@@ -155,3 +155,8 @@
     padding-left: 12px;
     margin-bottom: 8px;
 }
+
+/* 스크롤바 폭 변화 방지 */
+html {
+    overflow-y: scroll;
+}
